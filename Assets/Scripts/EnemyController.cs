@@ -1,18 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Transform playerTransform;
+
+    public float speed = 2f;
+
+    public float minDistance = 20f;
+
     void Start()
     {
-        
+        playerTransform = GameObject.Find("Player").GetComponent<Transform>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (playerTransform)
+        {
+            Vector3 direction = playerTransform.position - transform.position;
+            if(direction.magnitude > .1f)
+            {
+                direction.Normalize();
+
+                transform.position += direction * speed * Time.deltaTime;
+            }
+        }
     }
 }
