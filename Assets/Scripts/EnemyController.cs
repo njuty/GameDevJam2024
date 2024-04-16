@@ -6,8 +6,6 @@ public class EnemyController : MonoBehaviour
 
     public float speed = 1f;
 
-    public float minDistance = 20f;
-
     void Start()
     {
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
