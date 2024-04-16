@@ -4,7 +4,7 @@ public class EnemyController : MonoBehaviour
 {
     private Transform playerTransform;
 
-    public float speed = 2f;
+    public float speed = 1f;
 
     public float minDistance = 20f;
 
