@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class EnnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     private Camera mainCamera;
 
+    //TODO update when wave logic is available
     [SerializeField]
     int numberOfEntities = 10;
 
