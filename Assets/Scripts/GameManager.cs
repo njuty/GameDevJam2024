@@ -18,10 +18,9 @@ public class GameManager : MonoBehaviour
     private float spawnFrequencyStep = 0.25f;
 
     [Header("HUD")]
-    [SerializeField]
-    private TextMeshProUGUI waveText;
-    [SerializeField]
-    private TextMeshProUGUI waveTimer;
+    [SerializeField] private TextMeshProUGUI waveText;
+    [SerializeField] private TextMeshProUGUI waveTimer;
+    [SerializeField] private Texture2D waveCursorTexture;
 
     private int currentWave = 0;
     private float currentWaveRemainingTime;
@@ -64,6 +63,9 @@ public class GameManager : MonoBehaviour
                 isWaveActive = false;
                 onWaveEnd?.Invoke(currentWave);
 
+                // Restore default cursor
+                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
                 // Temp: later we will trigger wave from UI buttons
                 StartNextWave();
 
@@ -84,6 +86,10 @@ public class GameManager : MonoBehaviour
         currentWave += 1;
         currentWaveRemainingTime = waveBaseDuration + (waveDurationStep * (currentWave - 1));
         isWaveActive = true;
+
+        // Configure UI
+        var cursorOffset = new Vector2(waveCursorTexture.width / 2, waveCursorTexture.height / 2);
+        Cursor.SetCursor(waveCursorTexture, cursorOffset, CursorMode.Auto);
 
         // Configure spawner for new wave
         if (currentWave > 1)
