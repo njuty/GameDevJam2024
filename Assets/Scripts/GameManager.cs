@@ -18,10 +18,9 @@ public class GameManager : MonoBehaviour
     private float spawnFrequencyStep = 0.25f;
 
     [Header("HUD")]
-    [SerializeField]
-    private TextMeshProUGUI waveText;
-    [SerializeField]
-    private TextMeshProUGUI waveTimer;
+    [SerializeField] private TextMeshProUGUI waveText;
+    [SerializeField] private TextMeshProUGUI waveTimer;
+    [SerializeField] private GameObject powerChoiceScreen;
 
     private int currentWave = 0;
     private float currentWaveRemainingTime;
@@ -64,11 +63,9 @@ public class GameManager : MonoBehaviour
                 isWaveActive = false;
                 onWaveEnd?.Invoke(currentWave);
 
-                // Temp: later we will trigger wave from UI buttons
-                StartNextWave();
-
                 // TODO: Kill all spawns at the end of the wave
-                // spawner.StopSpawner();
+                spawner.StopSpawner();
+                ShowPowerChoice();
             }
         }
     }
@@ -109,5 +106,13 @@ public class GameManager : MonoBehaviour
         {
             waveTimer.color = Color.white;
         }
+    }
+
+    void ShowPowerChoice()
+    {
+        // TODO: Pick-up two random powers
+        
+        // Display UI
+        powerChoiceScreen.SetActive(true);
     }
 }
