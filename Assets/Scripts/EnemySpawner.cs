@@ -5,28 +5,40 @@ public class EnemySpawner : MonoBehaviour
 {
     private Camera mainCamera;
 
-    //TODO update when wave logic is available
-    [SerializeField]
-    int numberOfEntities = 10;
+    public float spawnInterval = 2f;
 
     [SerializeField]
-    float spawnInterval = 2f;
+    private GameObject enemyPrefab;
 
-    [SerializeField]
-    GameObject enemyPrefab;
+    private IEnumerator spawnCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
-        StartCoroutine(SpawnEntities());
+    }
+
+    public void StartSpawner()
+    {
+        if (spawnCoroutine != null)
+        {
+            Debug.Log("Spawner is already running");
+            return;
+        }
+        spawnCoroutine = SpawnEntities();
+        StartCoroutine(spawnCoroutine);
+    }
+
+    public void StopSpawner()
+    {
+        StopCoroutine(spawnCoroutine);
     }
 
     IEnumerator SpawnEntities()
     {
         yield return new WaitForSeconds(1f);
 
-        for(int i =0 ; i<numberOfEntities; i++)
+        while (true)
         {
             Vector2 mainCameraPosition = Camera.main.transform.position;
 
