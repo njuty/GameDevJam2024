@@ -1,7 +1,11 @@
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("UI")]
+    [SerializeField] private UIPowersInventory powersInventory;
+
     private AbstractPower[] powers;
     private AbstractPower activePower;
 
@@ -10,7 +14,8 @@ public class PlayerController : MonoBehaviour
         powers = GetComponentsInChildren<AbstractPower>();
         if (powers.Length > 0)
         {
-            activePower = powers[0];
+            powersInventory.SetPowersList(powers);
+            SetActivePower(powers[0]);
         }
         else
         {
@@ -35,5 +40,13 @@ public class PlayerController : MonoBehaviour
     {
         if (!activePower) return;
         activePower.Activate();
+    }
+
+    void SetActivePower(AbstractPower power)
+    {
+        activePower = power;
+
+        // Update UI
+        powersInventory.SetActivePower(activePower);
     }
 }
