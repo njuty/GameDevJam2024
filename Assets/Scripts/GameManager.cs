@@ -18,10 +18,8 @@ public class GameManager : MonoBehaviour
     private float spawnFrequencyStep = 0.25f;
 
     [Header("HUD")]
-    [SerializeField]
-    private TextMeshProUGUI waveText;
-    [SerializeField]
-    private TextMeshProUGUI waveTimer;
+    [SerializeField] private TextMeshProUGUI waveText;
+    [SerializeField] private TextMeshProUGUI waveTimer;
 
     private int currentWave = 0;
     private float currentWaveRemainingTime;
