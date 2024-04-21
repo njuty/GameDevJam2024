@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InvisibilityPotion : MonoBehaviour
+public class InvisibilityPotion : Potion
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void ApplyEffect()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //TODO manage effect
     }
 }

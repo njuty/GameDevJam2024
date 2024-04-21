@@ -6,11 +6,11 @@ public abstract class Potion : MonoBehaviour
     [SerializeField]
     float ttlPotion = 10f;
 
-    float restOfTimeAlive = 0;
+    float restOfTimeAlive = -1;
 
     Animator animator;
 
-    void Start()
+    protected virtual void Start()
     {
         restOfTimeAlive = ttlPotion;
 
@@ -19,12 +19,15 @@ public abstract class Potion : MonoBehaviour
 
     void Update()
     {
-        if (restOfTimeAlive > 0)
+        if (restOfTimeAlive > -1)
         {
-            restOfTimeAlive -= Time.deltaTime;
-        } else
-        {
-            SetDisappearanceAnimation();
+            if (restOfTimeAlive > 0)
+            {
+                restOfTimeAlive -= Time.deltaTime;
+            } else
+            {
+                SetDisappearanceAnimation();
+            }
         }
     }
 
