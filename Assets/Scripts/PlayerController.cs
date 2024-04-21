@@ -38,19 +38,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            if (activePowerIndex - 1 >= 0)
-            {
-                // Activate previous power
-                SetActivePower(activePowerIndex - 1);
-            }
+            // Activate previous power
+            SetActivePower(activePowerIndex - 1 >= 0 ? activePowerIndex - 1 : powers.Length - 1);
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            if (activePowerIndex + 1 < powers.Length)
-            {
-                // Activate next power
-                SetActivePower(activePowerIndex + 1);
-            }
+            // Activate next power
+            SetActivePower(activePowerIndex + 1 < powers.Length ? activePowerIndex + 1 : 0);
         }
     }
 

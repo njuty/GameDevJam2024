@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class AbstractPower : MonoBehaviour
 {
-    [Header("Power informations")]
+    [Header("Power information")]
     public string powerName;
     public Texture2D powerIcon;
 
