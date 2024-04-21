@@ -1,4 +1,4 @@
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -6,14 +6,14 @@ public class PlayerController : MonoBehaviour
     [Header("UI")]
     [SerializeField] private UIPowersInventory powersInventory;
 
-    private AbstractPower[] powers;
+    private List<AbstractPower> powers = new List<AbstractPower>();
     private AbstractPower activePower;
     private int activePowerIndex;
 
     void Start()
     {
-        powers = GetComponentsInChildren<AbstractPower>();
-        if (powers.Length > 0)
+        GetComponentsInChildren(powers);
+        if (powers.Count > 0)
         {
             powersInventory.SetPowersList(powers);
             SetActivePower(0);
@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
         var direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         transform.up = direction;
 
+        // Player actions
+
         if (Input.GetMouseButton(0))
         {
             ActivatePower();
@@ -39,12 +41,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             // Activate previous power
-            SetActivePower(activePowerIndex - 1 >= 0 ? activePowerIndex - 1 : powers.Length - 1);
+            SetActivePower(activePowerIndex - 1 >= 0 ? activePowerIndex - 1 : powers.Count - 1);
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
             // Activate next power
-            SetActivePower(activePowerIndex + 1 < powers.Length ? activePowerIndex + 1 : 0);
+            SetActivePower(activePowerIndex + 1 < powers.Count ? activePowerIndex + 1 : 0);
         }
     }
 
@@ -56,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
     void SetActivePower(int powerIndex)
     {
-        if (powers.Length < powerIndex)
+        if (powers.Count < powerIndex)
         {
             Debug.LogError("Invalid power index");
             return;
@@ -67,5 +69,19 @@ public class PlayerController : MonoBehaviour
 
         // Update UI
         powersInventory.SetActivePower(activePower);
+    }
+
+    public void AddPower(AbstractPower power)
+    {        
+        if (powers.Exists(p => p.powerName == power.powerName))
+        {
+            Debug.Log("Power is already unlocked for the player");
+            return;
+        }
+
+        var newPower = Instantiate(power.gameObject, transform.Find("Powers")).GetComponent<AbstractPower>();
+        
+        powers.Add(newPower);
+        powersInventory.AddPowerToList(newPower);
     }
 }

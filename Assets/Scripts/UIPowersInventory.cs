@@ -11,7 +11,7 @@ public class UIPowersInventory : MonoBehaviour
     private Dictionary<AbstractPower, UIPowerItem> powerItems = new();
     private UIPowerItem activePowerItem;
 
-    public void SetPowersList(AbstractPower[] powers)
+    public void SetPowersList(List<AbstractPower> powers)
     {
         foreach (var power in powers)
         {
