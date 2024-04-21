@@ -3,12 +3,38 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private readonly KeyCode[] alphaKeyCodes = {
+        KeyCode.Alpha1,
+        KeyCode.Alpha2,
+        KeyCode.Alpha3,
+        KeyCode.Alpha4,
+        KeyCode.Alpha5,
+        KeyCode.Alpha6,
+        KeyCode.Alpha7,
+        KeyCode.Alpha8,
+        KeyCode.Alpha9,
+    };
+
     [Header("UI")]
     [SerializeField] private UIPowersInventory powersInventory;
 
     private List<AbstractPower> powers = new List<AbstractPower>();
     private AbstractPower activePower;
     private int activePowerIndex;
+
+    public void AddPower(AbstractPower power)
+    {
+        if (powers.Exists(p => p.powerName == power.powerName))
+        {
+            Debug.Log("Power is already unlocked for the player");
+            return;
+        }
+
+        var newPower = Instantiate(power.gameObject, transform.Find("Powers")).GetComponent<AbstractPower>();
+
+        powers.Add(newPower);
+        powersInventory.AddPowerToList(newPower);
+    }
 
     void Start()
     {
@@ -31,11 +57,25 @@ public class PlayerController : MonoBehaviour
         var direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         transform.up = direction;
 
-        // Player actions
+        HandlePlayerInput();
+    }
 
+    void HandlePlayerInput()
+    {
         if (Input.GetMouseButton(0))
         {
             ActivatePower();
+        }
+
+        // Allow to choose active power with alphanumeric keys
+        for (var i = 0; i < powers.Count; i++)
+        {
+            if (i >= alphaKeyCodes.Length) break;
+            
+            if (Input.GetKeyDown(alphaKeyCodes[i]))
+            {
+                SetActivePower(i);
+            }
         }
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
@@ -69,19 +109,5 @@ public class PlayerController : MonoBehaviour
 
         // Update UI
         powersInventory.SetActivePower(activePower);
-    }
-
-    public void AddPower(AbstractPower power)
-    {        
-        if (powers.Exists(p => p.powerName == power.powerName))
-        {
-            Debug.Log("Power is already unlocked for the player");
-            return;
-        }
-
-        var newPower = Instantiate(power.gameObject, transform.Find("Powers")).GetComponent<AbstractPower>();
-        
-        powers.Add(newPower);
-        powersInventory.AddPowerToList(newPower);
     }
 }
