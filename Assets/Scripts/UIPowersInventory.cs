@@ -8,8 +8,8 @@ public class UIPowersInventory : MonoBehaviour
 {
     [SerializeField] private GameObject prefabPowerItem;
 
-    private Dictionary<AbstractPower, GameObject> powerItems = new();
-    private GameObject activePowerItem;
+    private Dictionary<AbstractPower, UIPowerItem> powerItems = new();
+    private UIPowerItem activePowerItem;
 
     public void SetPowersList(AbstractPower[] powers)
     {
@@ -23,16 +23,11 @@ public class UIPowersInventory : MonoBehaviour
     {
         var powerItem = Instantiate(prefabPowerItem, transform);
         powerItem.name = power.powerName;
-        powerItem.GetComponent<Image>().sprite = Sprite.Create(
-            power.powerIcon,
-            new Rect(0, 0, power.powerIcon.width, power.powerIcon.height),
-            new Vector2(0.5f, 0.5f)
-        );
 
-        var textMesh = powerItem.transform.Find("PowerText").GetComponent<TMP_Text>();
-        textMesh.text = power.powerName;
+        var uiPowerItem = powerItem.GetComponent<UIPowerItem>();
+        uiPowerItem.Init(power);
 
-        powerItems.Add(power, powerItem);
+        powerItems.Add(power, uiPowerItem);
     }
 
     public void SetActivePower(AbstractPower activePower)
@@ -40,14 +35,14 @@ public class UIPowersInventory : MonoBehaviour
         // First disable previous active power item
         if (activePowerItem)
         {
-            activePowerItem.transform.Find("PowerActiveBorder").gameObject.SetActive(false);
+            activePowerItem.SetActiveBorder(false);
         }
 
         // Then set new power item as active
-        if (powerItems.TryGetValue(activePower, out var powerItem))
+        if (powerItems.TryGetValue(activePower, out var uiPowerItem))
         {
-            powerItem.transform.Find("PowerActiveBorder").gameObject.SetActive(true);
-            activePowerItem = powerItem;
+            uiPowerItem.SetActiveBorder(true);
+            activePowerItem = uiPowerItem;
         }
         else
         {
