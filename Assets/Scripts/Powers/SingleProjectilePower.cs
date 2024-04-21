@@ -10,7 +10,11 @@ public class SingleProjectilePower : AbstractPower
 
     void Start()
     {
-        shootPoint = GameObject.Find("/Player/ShootPoint").GetComponent<Transform>();
+        // Powers should always be placed in a "Powers" empty object
+        // ex. Player/Powers/AwesomePower
+        // ex. Enemy/Powers/AwesomePower
+        var parent = GetControllerGameObject();
+        shootPoint = parent.transform.Find("ShootPoint").GetComponent<Transform>();
     }
 
     public override void Activate()
@@ -23,5 +27,17 @@ public class SingleProjectilePower : AbstractPower
 
         // Set cooldown before next power use
         cooldown = activationRate;
+    }
+
+    GameObject GetControllerGameObject()
+    {
+        var playerController = GetComponentInParent<PlayerController>();
+
+        if (playerController)
+        {
+            return playerController.gameObject;
+        }
+
+        return GetComponentInParent<EnemyController>().gameObject;
     }
 }
