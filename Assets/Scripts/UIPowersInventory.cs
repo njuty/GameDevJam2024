@@ -22,6 +22,7 @@ public class UIPowersInventory : MonoBehaviour
     public void AddPowerToList(AbstractPower power)
     {
         var powerItem = Instantiate(prefabPowerItem, transform);
+        powerItem.name = power.powerName;
         powerItem.GetComponent<Image>().sprite = Sprite.Create(
             power.powerIcon,
             new Rect(0, 0, power.powerIcon.width, power.powerIcon.height),
@@ -46,6 +47,7 @@ public class UIPowersInventory : MonoBehaviour
         if (powerItems.TryGetValue(activePower, out var powerItem))
         {
             powerItem.transform.Find("PowerActiveBorder").gameObject.SetActive(true);
+            activePowerItem = powerItem;
         }
         else
         {

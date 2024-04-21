@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyShotPower : AbstractPower
+public class SingleProjectilePower : AbstractPower
 {
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float activationRate = 0.5f;
@@ -27,7 +27,9 @@ public class EnergyShotPower : AbstractPower
     {
         if (cooldown > 0) return;
 
-        Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
+        // Get sprite size to correctly place the projectile in front of the player
+        var spriteBounds = projectilePrefab.GetComponent<SpriteRenderer>().bounds;
+        Instantiate(projectilePrefab, shootPoint.position + (shootPoint.up * spriteBounds.size.y / 2), shootPoint.rotation);
 
         // Set cooldown before next power use
         cooldown = activationRate;

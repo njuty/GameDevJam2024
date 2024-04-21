@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private AbstractPower[] powers;
     private AbstractPower activePower;
+    private int activePowerIndex;
 
     void Start()
     {
@@ -15,7 +16,7 @@ public class PlayerController : MonoBehaviour
         if (powers.Length > 0)
         {
             powersInventory.SetPowersList(powers);
-            SetActivePower(powers[0]);
+            SetActivePower(0);
         }
         else
         {
@@ -34,6 +35,23 @@ public class PlayerController : MonoBehaviour
         {
             ActivatePower();
         }
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            if (activePowerIndex - 1 >= 0)
+            {
+                // Activate previous power
+                SetActivePower(activePowerIndex - 1);
+            }
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            if (activePowerIndex + 1 < powers.Length)
+            {
+                // Activate next power
+                SetActivePower(activePowerIndex + 1);
+            }
+        }
     }
 
     void ActivatePower()
@@ -42,9 +60,16 @@ public class PlayerController : MonoBehaviour
         activePower.Activate();
     }
 
-    void SetActivePower(AbstractPower power)
+    void SetActivePower(int powerIndex)
     {
-        activePower = power;
+        if (powers.Length < powerIndex)
+        {
+            Debug.LogError("Invalid power index");
+            return;
+        }
+
+        activePowerIndex = powerIndex;
+        activePower = powers[powerIndex];
 
         // Update UI
         powersInventory.SetActivePower(activePower);
