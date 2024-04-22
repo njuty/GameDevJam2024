@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
 
         while (true)
         {
-            Vector2 mainCameraPosition = Camera.main.transform.position;
+            Vector2 mainCameraPosition = mainCamera.transform.position;
 
             float farClipPlane = mainCamera.farClipPlane;
 
