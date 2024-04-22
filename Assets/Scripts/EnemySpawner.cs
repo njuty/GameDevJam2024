@@ -1,15 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private Camera mainCamera;
-
     public float spawnInterval = 2f;
 
-    [SerializeField]
-    private GameObject enemyPrefab;
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private List<AbstractPower> enemyPowers = new List<AbstractPower>();
 
+    private Camera mainCamera;
     private IEnumerator spawnCoroutine;
 
     // Start is called before the first frame update
@@ -32,6 +32,28 @@ public class EnemySpawner : MonoBehaviour
     public void StopSpawner()
     {
         StopCoroutine(spawnCoroutine);
+        spawnCoroutine = null;
+    }
+
+    public void ClearSpawns()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (var enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+    }
+
+    public void AddPower(AbstractPower power)
+    {
+        if (enemyPowers.Exists(p => p.powerName == power.powerName))
+        {
+            Debug.Log("Power is already assigned for this spawner");
+            return;
+        }
+
+        enemyPowers.Add(power);
     }
 
     IEnumerator SpawnEntities()
@@ -52,7 +74,15 @@ public class EnemySpawner : MonoBehaviour
             float y = mainCameraPosition.y + Mathf.Sin(randomAngle) * (farClipPlane * 0.06f);
 
             Vector2 spawnPosition = new Vector2(x, y);
-            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            var enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            var enemyController = enemy.GetComponent<EnemyController>();
+
+            if (enemyPowers.Count > 0)
+            {
+                // Pick a random power and give it to enemy
+                var powerIndex = Random.Range(0, enemyPowers.Count - 1);
+                enemyController.AddPower(enemyPowers[powerIndex]);
+            }
 
             yield return new WaitForSeconds(spawnInterval);
         }

@@ -19,7 +19,7 @@ public class SingleProjectilePower : AbstractPower
 
     public override void Activate()
     {
-        if (cooldown > 0) return;
+        if (!CanActivate()) return;
 
         // Get sprite size to correctly place the projectile in front of the player
         var spriteBounds = projectilePrefab.GetComponent<SpriteRenderer>().bounds;
@@ -27,6 +27,11 @@ public class SingleProjectilePower : AbstractPower
 
         // Set cooldown before next power use
         cooldown = activationRate;
+    }
+
+    public override bool CanActivate()
+    {
+        return cooldown <= 0;
     }
 
     GameObject GetControllerGameObject()
