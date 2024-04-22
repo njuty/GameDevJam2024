@@ -77,9 +77,11 @@ public class EnemySpawner : MonoBehaviour
             var enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
             var enemyController = enemy.GetComponent<EnemyController>();
 
-            foreach (var power in enemyPowers)
+            if (enemyPowers.Count > 0)
             {
-                enemyController.AddPower(power);
+                // Pick a random power and give it to enemy
+                var powerIndex = Random.Range(0, enemyPowers.Count - 1);
+                enemyController.AddPower(enemyPowers[powerIndex]);
             }
 
             yield return new WaitForSeconds(spawnInterval);
