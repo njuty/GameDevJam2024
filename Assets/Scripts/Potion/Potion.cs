@@ -6,7 +6,7 @@ public abstract class Potion : MonoBehaviour
     [SerializeField]
     float ttlPotion = 10f;
 
-    float restOfTimeAlive = -1;
+    float restOfTimeAlive;
 
     Animator animator;
 
@@ -19,21 +19,18 @@ public abstract class Potion : MonoBehaviour
 
     void Update()
     {
-        if (restOfTimeAlive > -1)
+        if (restOfTimeAlive > 0)
         {
-            if (restOfTimeAlive > 0)
-            {
-                restOfTimeAlive -= Time.deltaTime;
-            } else
-            {
-                SetDisappearanceAnimation();
-            }
+            restOfTimeAlive -= Time.deltaTime;
+        } else
+        {
+            SetDisappearanceAnimation();
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals("Player"))
+        if (collision.CompareTag("Player"))
         {
             ApplyEffect();
             SetCatchAnimation();
