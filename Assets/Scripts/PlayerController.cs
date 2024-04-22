@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     private AbstractPower activePower;
     private int activePowerIndex;
 
+    [Header("Player settings")]
+    [SerializeField]
+    private float speed = 2.5f;
+
     public void AddPower(AbstractPower power)
     {
         if (powers.Exists(p => p.powerName == power.powerName))
@@ -64,6 +68,7 @@ public class PlayerController : MonoBehaviour
 
     void HandlePlayerInput()
     {
+        ManagePosition();
         if (Input.GetMouseButton(0))
         {
             ActivatePower();
@@ -90,6 +95,16 @@ public class PlayerController : MonoBehaviour
             // Activate next power
             SetActivePower(activePowerIndex + 1 < powers.Count ? activePowerIndex + 1 : 0);
         }
+    }
+
+    void ManagePosition()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+
+        Vector2 movement = new Vector2(x, y);
+
+        transform.Translate(movement * speed * Time.deltaTime, Space.World);
     }
 
     void ActivatePower()
