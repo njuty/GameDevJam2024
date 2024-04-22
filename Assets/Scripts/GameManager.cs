@@ -1,8 +1,11 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private PlayerController playerController;
+
     [Header("Wave settings")]
     [SerializeField]
     private float waveBaseDuration = 20f;
@@ -17,10 +20,15 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("For each wave decrease spawn interval by this value")]
     private float spawnFrequencyStep = 0.25f;
 
+    [Header("Power settings")]
+    [SerializeField]
+    private List<AbstractPower> availablePowersList = new List<AbstractPower>();
+
     [Header("HUD")]
+    [SerializeField] private UIManager uiManager;
     [SerializeField] private TextMeshProUGUI waveText;
     [SerializeField] private TextMeshProUGUI waveTimer;
-    [SerializeField] private GameObject powerChoiceScreen;
+    [SerializeField] private UIPowerChoice powerChoiceScreen;
 
     private int currentWave = 0;
     private float currentWaveRemainingTime;
@@ -44,6 +52,9 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        // Register event for power selection
+        powerChoiceScreen.onSelectPower += OnSelectPower;
+
         // For test purposes, immediately start first wave
         StartNextWave();
     }
@@ -60,12 +71,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                isWaveActive = false;
-                onWaveEnd?.Invoke(currentWave);
-
-                // TODO: Kill all spawns at the end of the wave
-                spawner.StopSpawner();
-                ShowPowerChoice();
+                EndCurrentWave();
             }
         }
     }
@@ -92,6 +98,25 @@ public class GameManager : MonoBehaviour
         onWaveStart?.Invoke(currentWave);
     }
 
+    void EndCurrentWave()
+    {
+        isWaveActive = false;
+        onWaveEnd?.Invoke(currentWave);
+
+        // Stop spawner and destroy all spawns at the end of the wave
+        spawner.StopSpawner();
+        spawner.ClearSpawns();
+
+        // Clear all objects limited to game screen (ex. projectiles)
+        var gameScreenObjects = GameObject.FindGameObjectsWithTag("GameScreenObject");
+        foreach (var gameScreenObject in gameScreenObjects)
+        {
+            Destroy(gameScreenObject);
+        }
+
+        ShowPowerChoice();
+    }
+
     void UpdateWaveHud()
     {
         waveText.text = string.Format("Wave {0}", currentWave);
@@ -110,9 +135,68 @@ public class GameManager : MonoBehaviour
 
     void ShowPowerChoice()
     {
-        // TODO: Pick-up two random powers
-        
-        // Display UI
-        powerChoiceScreen.SetActive(true);
+        // Pick-up two random powers
+        int firstPowerIndex;
+        int secondPowerIndex;
+
+        if (availablePowersList.Count < 2)
+        {
+            Debug.LogError("Not enough powers");
+            return;
+        }
+        else if (availablePowersList.Count == 2)
+        {
+            firstPowerIndex = 0;
+            secondPowerIndex = 1;
+        }
+        else
+        {
+            do
+            {
+                firstPowerIndex = Random.Range(0, availablePowersList.Count - 1);
+                secondPowerIndex = Random.Range(0, availablePowersList.Count - 1);
+            } while (firstPowerIndex == secondPowerIndex);
+        }
+
+        // Hide player
+        playerController.gameObject.SetActive(false);
+
+        // Display PowerChoice screen
+        uiManager.ToggleScreen("UI_PowerChoiceScreen", true);
+        powerChoiceScreen.ShowPowerChoice(
+            availablePowersList[firstPowerIndex],
+            availablePowersList[secondPowerIndex]
+        );
+
+        SetGamePaused(true);
+    }
+
+    void OnSelectPower(AbstractPower selectedPower, AbstractPower omittedPower)
+    {
+        // Add selected power to player
+        playerController.AddPower(selectedPower);
+
+        // Add omitted power to enemies
+        var spawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+        foreach (var spawner in spawners)
+        {
+            spawner.GetComponent<EnemySpawner>().AddPower(omittedPower);
+        }
+
+        // Restore game screen and player
+        uiManager.ToggleScreen("UI_GameScreen", true);
+        playerController.gameObject.SetActive(true);
+
+        // Clear power choices for next time
+        powerChoiceScreen.ClearChoices();
+
+        SetGamePaused(false);
+
+        StartNextWave();
+    }
+
+    void SetGamePaused(bool isPaused)
+    {
+        Time.timeScale = isPaused ? 0 : 1;
     }
 }

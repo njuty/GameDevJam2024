@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - UI_GameScreen
+  - UI_PowerChoiceScreen
+  - GameScreenObject
+  - EnemySpawner
   layers:
   - Default
   - TransparentFX

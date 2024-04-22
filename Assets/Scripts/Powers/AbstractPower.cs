@@ -20,4 +20,5 @@ public abstract class AbstractPower : MonoBehaviour
     }
     
     public abstract void Activate();
+    public abstract bool CanActivate();
 }

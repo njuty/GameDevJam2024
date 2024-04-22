@@ -8,8 +8,13 @@ public class EnemyController : MonoBehaviour
     public float speed = 1f;
 
     private List<AbstractPower> powers = new List<AbstractPower>();
-    private AbstractPower activePower;
-    private int activePowerIndex;
+
+    public void AddPower(AbstractPower power)
+    {
+        var newPower = Instantiate(power.gameObject, transform.Find("Powers")).GetComponent<AbstractPower>();
+
+        powers.Add(newPower);
+    }
 
     void Start()
     {
@@ -18,12 +23,6 @@ public class EnemyController : MonoBehaviour
         if (!playerTransform)
         {
             Debug.LogError("Unable to find player");
-        }
-
-        GetComponentsInChildren(powers);
-        if (powers.Count > 0)
-        {
-            SetActivePower(0);
         }
     }
 
@@ -49,19 +48,14 @@ public class EnemyController : MonoBehaviour
 
     void ActivatePower()
     {
-        if (!activePower) return;
-        activePower.Activate();
-    }
-
-    void SetActivePower(int powerIndex)
-    {
-        if (powers.Count < powerIndex)
+        // Search for the first available power
+        foreach (var power in powers)
         {
-            Debug.LogError("Invalid power index");
-            return;
+            if (power.CanActivate())
+            {
+                power.Activate();
+                break;
+            }
         }
-
-        activePowerIndex = powerIndex;
-        activePower = powers[powerIndex];
     }
 }
