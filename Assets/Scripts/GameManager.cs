@@ -183,6 +183,10 @@ public class GameManager : MonoBehaviour
             spawner.GetComponent<EnemySpawner>().AddPower(omittedPower);
         }
 
+        // Remove powers from available powers
+        availablePowersList.Remove(selectedPower);
+        availablePowersList.Remove(omittedPower);
+
         // Restore game screen and player
         uiManager.ToggleScreen("UI_GameScreen", true);
         playerController.gameObject.SetActive(true);
