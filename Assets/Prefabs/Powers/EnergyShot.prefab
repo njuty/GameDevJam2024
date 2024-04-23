@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerName: Energy Shot
-  powerIcon: {fileID: 2800000, guid: a6e9b674ad1c9e22aa3bb49320de98a3, type: 3}
-  projectilePrefab: {fileID: 5151785666755160144, guid: 21aef26ca03fc2bc288fbf96bce0a22b, type: 3}
+  powerIcon: {fileID: 2800000, guid: c70050093b1e453b58a1643edebef820, type: 3}
   activationRate: 0.25
+  projectilePrefab: {fileID: 5151785666755160144, guid: 21aef26ca03fc2bc288fbf96bce0a22b, type: 3}
