@@ -3,9 +3,16 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    private const float MAX_HEALTH_POINT = 50f;
+
     private Transform playerTransform;
 
     public float speed = 1f;
+
+    [SerializeField]
+    private float healthPoint;
+
+    Animator animator;
 
     private List<AbstractPower> powers = new List<AbstractPower>();
 
@@ -18,12 +25,15 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        healthPoint = MAX_HEALTH_POINT;
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
 
         if (!playerTransform)
         {
             Debug.LogError("Unable to find player");
         }
+
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -46,6 +56,7 @@ public class EnemyController : MonoBehaviour
         ActivatePower();
     }
 
+
     void ActivatePower()
     {
         // Search for the first available power
@@ -58,4 +69,24 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
+    public void TakeDamage(float amount)
+    {
+        float newHPValue = healthPoint - amount;
+        if (newHPValue <= 0)
+        {
+            animator.SetBool("isDead", true);
+        } else
+        {
+            animator.SetTrigger("isTouched");
+            animator.ResetTrigger("isTouched");
+        }
+        healthPoint = newHPValue;
+    }
+
+    void onDeathAnimationComplete()
+    {
+        Destroy(gameObject);
+    }
+
 }
