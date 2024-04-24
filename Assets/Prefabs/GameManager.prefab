@@ -44,3 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08264dd5e32ef5c558c526d694539dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  waveBaseDuration: 20
+  waveDurationStep: 5
+  maxWave: 10
+  spawner: {fileID: 0}
+  spawnFrequencyStep: 0.25
+  availablePowersList: []
+  uiManager: {fileID: 0}
+  waveText: {fileID: 0}
+  waveTimer: {fileID: 0}
+  powerChoiceScreen: {fileID: 0}
