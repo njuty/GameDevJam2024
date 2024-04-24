@@ -255,17 +255,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1874957239788988039, guid: 1941f46b0b85c9e4ca611cb82978f9a3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3926769408638259299, guid: 1941f46b0b85c9e4ca611cb82978f9a3, type: 3}
       propertyPath: m_Name
       value: Level
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 1874957239788988039, guid: 1941f46b0b85c9e4ca611cb82978f9a3, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1941f46b0b85c9e4ca611cb82978f9a3, type: 3}
@@ -425,10 +420,6 @@ PrefabInstance:
     - target: {fileID: 2955528646171332401, guid: e5fd3cade5d954e39990b6eff481794c, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5525223774681376222, guid: e5fd3cade5d954e39990b6eff481794c, type: 3}
-      propertyPath: m_BodyType
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7076666140686652023, guid: e5fd3cade5d954e39990b6eff481794c, type: 3}
       propertyPath: m_IsActive
