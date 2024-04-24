@@ -9,6 +9,9 @@ TagManager:
   - UI_PowerChoiceScreen
   - GameScreenObject
   - EnemySpawner
+  - PowerEffect
+  - WaveObject
+  - UI_EndlessWaveScreen
   layers:
   - Default
   - TransparentFX
