@@ -151,8 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d69e9b116c44091ac652d0383f64d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPotion: {fileID: 366624594213176164, guid: 0e1c725811ec54180b609dcf6f244cf2, type: 3}
-  invisibilityPotion: {fileID: 3363255497866329340, guid: 2b4cc6fb86dce4bb9b0ea5308a777297, type: 3}
+  healthPotion: {fileID: 4266307375050572477, guid: 0e1c725811ec54180b609dcf6f244cf2, type: 3}
+  invisibilityPotion: {fileID: 2780671998783529543, guid: 2b4cc6fb86dce4bb9b0ea5308a777297, type: 3}
   spawnRadius: 20
   minTimeBetweenSpawns: 5
   maxTimeBetweenSpawns: 20
@@ -605,6 +605,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2139713197}
     m_Modifications:
+    - target: {fileID: -9078252420988632015, guid: a229ad152643b3f588ec4b0a96af1c39, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 413379248170552093, guid: a229ad152643b3f588ec4b0a96af1c39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -831,6 +835,10 @@ PrefabInstance:
       propertyPath: waveText
       value: 
       objectReference: {fileID: 44345570}
+    - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
       propertyPath: uiManager
       value: 

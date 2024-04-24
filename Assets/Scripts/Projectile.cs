@@ -22,12 +22,4 @@ public class Projectile : MonoBehaviour
         rb.velocity = transform.up * speed;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
-            enemy.TakeDamage(damage);
-        }
-    }
 }

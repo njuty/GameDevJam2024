@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float healthPoint;
 
+    private bool isDead = false;
+
     Animator animator;
 
     private List<AbstractPower> powers = new List<AbstractPower>();
@@ -38,7 +40,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (!playerTransform) return;
+        if (!playerTransform || isDead) return;
 
         // Get direction to player
         Vector3 direction = new Vector2(playerTransform.position.x - transform.position.x, playerTransform.position.y - transform.position.y);
@@ -73,13 +75,13 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(float amount)
     {
         float newHPValue = healthPoint - amount;
+        animator.SetTrigger("isTouched");
         if (newHPValue <= 0)
         {
             animator.SetBool("isDead", true);
-        } else
-        {
-            animator.SetTrigger("isTouched");
-            animator.ResetTrigger("isTouched");
+            isDead = true;
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            Destroy(rb);
         }
         healthPoint = newHPValue;
     }
