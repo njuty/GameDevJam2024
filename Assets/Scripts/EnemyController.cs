@@ -9,6 +9,9 @@ public class EnemyController : MonoBehaviour
 
     public float speed = 1f;
 
+    [HideInInspector]
+    float physicalDamage = 1f;
+
     [SerializeField]
     private float healthPoint;
 
@@ -89,6 +92,15 @@ public class EnemyController : MonoBehaviour
     void onDeathAnimationComplete()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            player.TakeDamage(physicalDamage);
+        }
     }
 
 }

@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Projectile : AbstractProjectile
 {
-    [SerializeField] private float damage = 50f;
-
     private Rigidbody2D rb;
 
     void Start()

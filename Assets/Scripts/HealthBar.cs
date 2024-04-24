@@ -6,7 +6,7 @@ public class HealthBar : MonoBehaviour
 {
     private const float MAX_HEALTH = 100f;
 
-    private float health;
+    public float health;
 
     [SerializeField]
     Image healthBarImageToFill;

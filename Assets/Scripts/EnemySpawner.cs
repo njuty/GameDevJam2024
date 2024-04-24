@@ -70,8 +70,8 @@ public class EnemySpawner : MonoBehaviour
             float randomAngle = Random.Range(0f, Mathf.PI * 2f);
 
             // farClipPlane with multiplier permit to take into consideration camera settings
-            float x = mainCameraPosition.x + Mathf.Cos(randomAngle) * (farClipPlane * 0.06f);
-            float y = mainCameraPosition.y + Mathf.Sin(randomAngle) * (farClipPlane * 0.06f);
+            float x = mainCameraPosition.x + Mathf.Cos(randomAngle) * (farClipPlane * 0.03f);
+            float y = mainCameraPosition.y + Mathf.Sin(randomAngle) * (farClipPlane * 0.03f);
 
             Vector2 spawnPosition = new Vector2(x, y);
             var enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);

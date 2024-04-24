@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        // Register event for game over
+        playerController.onDeath += OnDeath;
         // Register event for power selection
         powerChoiceScreen.onSelectPower += OnSelectPower;
 
@@ -202,5 +205,18 @@ public class GameManager : MonoBehaviour
     void SetGamePaused(bool isPaused)
     {
         Time.timeScale = isPaused ? 0 : 1;
+    }
+
+    void OnDeath()
+    {
+        SetGamePaused(true);
+        uiManager.ToggleScreen("UI_GameOverScreen", true);
+    }
+
+    void ResetScene()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+        SetGamePaused(false);
     }
 }

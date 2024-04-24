@@ -18,13 +18,4 @@ public class Laser : AbstractProjectile
     {
         Destroy(gameObject);
     }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
-            enemy.TakeDamage(damage);
-        }
-    }
 }
