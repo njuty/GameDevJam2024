@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Projectile : MonoBehaviour
+public class Projectile : AbstractProjectile
 {
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float lifeTime = 3f;
-
     private Rigidbody2D rb;
 
     void Start()

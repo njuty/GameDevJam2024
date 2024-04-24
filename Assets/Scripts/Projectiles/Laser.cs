@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class Laser : AbstractProjectile
 {
-    [SerializeField] private float lifeTime = 0.5f;
-
     // Start is called before the first frame update
     void Start()
     {

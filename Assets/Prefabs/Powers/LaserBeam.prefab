@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerName: Laser Beam
   powerIcon: {fileID: 2800000, guid: 0fb2b379de8d02362afd64d291051490, type: 3}
-  projectilePrefab: {fileID: 7627642665299073487, guid: 5c2a35b88bab6caec9389101581e2f79, type: 3}
   activationRate: 1
+  enemyActivationRate: 3
+  projectilePrefab: {fileID: 7627642665299073487, guid: 5c2a35b88bab6caec9389101581e2f79, type: 3}
