@@ -157,4 +157,9 @@ public class PlayerController : MonoBehaviour
             onDeath();
         }
     }
+
+    public List<AbstractPower> GetPowers()
+    {
+        return powers;
+    }
 }

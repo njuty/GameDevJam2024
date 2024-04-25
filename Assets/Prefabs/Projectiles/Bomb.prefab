@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: -4464715907104714006}
   m_Layer: 9
   m_Name: Bomb
-  m_TagString: PowerEffect
+  m_TagString: GameScreenLimitedObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -285,6 +285,7 @@ MonoBehaviour:
   speed: 1
   lifeTime: 10
   damage: 10
+  destroyOnHit: 1
   launcher: {fileID: 0}
   enemySpeed: 1
   enemyLifeTime: 10
