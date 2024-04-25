@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     private int currentWave = 0;
     private float currentWaveRemainingTime;
     private bool isWaveActive = false;
+    private bool isEndlessWave = false;
 
     // Events
     public delegate void OnWaveStart(int wave);
@@ -67,9 +68,17 @@ public class GameManager : MonoBehaviour
     {
         if (isWaveActive)
         {
-            if (currentWaveRemainingTime > 0)
+            if (currentWaveRemainingTime > 0 || isEndlessWave)
             {
-                currentWaveRemainingTime -= Time.deltaTime;
+                if (isEndlessWave)
+                {
+                    currentWaveRemainingTime += Time.deltaTime;
+                }
+                else
+                {
+                    currentWaveRemainingTime -= Time.deltaTime;
+                }
+
                 UpdateWaveHud();
             }
             else
@@ -79,16 +88,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void StartNextWave()
+    void StartNextWave(bool endless = false)
     {
-        if (currentWave + 1 > maxWave)
+        isEndlessWave = endless;
+
+        if (currentWave + 1 > maxWave && !isEndlessWave)
         {
             Debug.LogError("Invalid next wave");
             return;
         }
 
         currentWave += 1;
-        currentWaveRemainingTime = waveBaseDuration + (waveDurationStep * (currentWave - 1));
+        currentWaveRemainingTime = !isEndlessWave ? waveBaseDuration + (waveDurationStep * (currentWave - 1)) : 0;
         isWaveActive = true;
 
         // Configure spawner for new wave
@@ -122,7 +133,14 @@ public class GameManager : MonoBehaviour
 
     void UpdateWaveHud()
     {
-        waveText.text = string.Format("Wave {0}", currentWave);
+        if (isEndlessWave)
+        {
+            waveText.text = "Endless Wave";
+        }
+        else
+        {
+            waveText.text = string.Format("Wave {0}", currentWave);
+        }
 
         var remainingSeconds = Mathf.Max(Mathf.CeilToInt(currentWaveRemainingTime), 0);
         waveTimer.text = string.Format("{0}", remainingSeconds);
@@ -138,13 +156,19 @@ public class GameManager : MonoBehaviour
 
     void ShowPowerChoice()
     {
+        SetGamePaused(true);
+
+        // Hide player
+        playerController.gameObject.SetActive(false);
+
         // Pick-up two random powers
         int firstPowerIndex;
         int secondPowerIndex;
 
         if (availablePowersList.Count < 2)
         {
-            Debug.LogError("Not enough powers");
+            Debug.Log("Not enough powers. Show endless wave screen.");
+            uiManager.ToggleScreen("UI_EndlessWaveScreen", true);
             return;
         }
         else if (availablePowersList.Count == 2)
@@ -161,17 +185,12 @@ public class GameManager : MonoBehaviour
             } while (firstPowerIndex == secondPowerIndex);
         }
 
-        // Hide player
-        playerController.gameObject.SetActive(false);
-
         // Display PowerChoice screen
         uiManager.ToggleScreen("UI_PowerChoiceScreen", true);
         powerChoiceScreen.ShowPowerChoice(
             availablePowersList[firstPowerIndex],
             availablePowersList[secondPowerIndex]
         );
-
-        SetGamePaused(true);
     }
 
     void OnSelectPower(AbstractPower selectedPower, AbstractPower omittedPower)
@@ -218,5 +237,14 @@ public class GameManager : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
         SetGamePaused(false);
+    }
+    
+    public void StartEndlessWave()
+    {
+        uiManager.ToggleScreen("UI_GameScreen", true);
+        playerController.gameObject.SetActive(true);
+        SetGamePaused(false);
+
+        StartNextWave(true);
     }
 }

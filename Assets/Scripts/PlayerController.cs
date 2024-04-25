@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
     public delegate void OnDeath();
@@ -29,9 +31,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player settings")]
     [SerializeField]
-    private float speed = 2.5f;
-    [SerializeField]
     private HealthBar healthBar;
+    [SerializeField] private float speed = 2.5f;
+    [SerializeField] private float maxSpeed = 5f;
+
+    private Rigidbody2D rb;
 
     public void AddPower(AbstractPower power)
     {
@@ -50,6 +54,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+
         GetComponentsInChildren(powers);
         if (powers.Count > 0)
         {
@@ -77,6 +83,7 @@ public class PlayerController : MonoBehaviour
     void HandlePlayerInput()
     {
         ManagePosition();
+
         if (Input.GetMouseButton(0))
         {
             ActivatePower();
@@ -110,9 +117,14 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
-        Vector2 movement = new Vector2(x, y);
+        var movement = new Vector3(x, y, 0);
 
-        transform.Translate(movement * speed * Time.deltaTime, Space.World);
+        rb.AddForce(movement * speed * Time.deltaTime, ForceMode2D.Impulse);
+
+        if (rb.velocity.magnitude > maxSpeed)
+        {
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+        }
     }
 
     void ActivatePower()

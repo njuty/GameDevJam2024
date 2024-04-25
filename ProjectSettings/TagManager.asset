@@ -11,6 +11,7 @@ TagManager:
   - EnemySpawner
   - PowerEffect
   - WaveObject
+  - UI_EndlessWaveScreen
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - CameraBox
   - 
   - 
   - 

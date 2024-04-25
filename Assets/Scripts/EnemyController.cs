@@ -6,6 +6,8 @@ public class EnemyController : MonoBehaviour
     private Transform playerTransform;
 
     public float speed = 1f;
+    public float maxDistance = 20f;
+    public float minDistanceForPower = 10f;
 
     [HideInInspector]
     float physicalDamage = 1f;
@@ -15,6 +17,8 @@ public class EnemyController : MonoBehaviour
     HealthBar healthBar;
 
     private bool isDead = false;
+
+    Rigidbody2D rb;
 
     Animator animator;
 
@@ -29,6 +33,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
 
         if (!playerTransform)
@@ -43,9 +48,18 @@ public class EnemyController : MonoBehaviour
     {
         if (!playerTransform || isDead) return;
 
+        var distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+
+        if (distanceToPlayer > maxDistance)
+        {   
+            // Kill enemy if too far away from player
+            Destroy(gameObject);
+            return;
+        }
+
         // Get direction to player
         Vector3 direction = new Vector2(playerTransform.position.x - transform.position.x, playerTransform.position.y - transform.position.y);
-
+        
         // Rotate player to face mouse position
         transform.up = direction;
 
@@ -56,7 +70,10 @@ public class EnemyController : MonoBehaviour
             transform.position += direction * speed * Time.deltaTime;
         }
 
-        ActivatePower();
+        if (distanceToPlayer < minDistanceForPower)
+        {
+            ActivatePower();
+        }
     }
 
 
@@ -81,7 +98,6 @@ public class EnemyController : MonoBehaviour
         {
             animator.SetBool("isDead", true);
             isDead = true;
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
             Destroy(rb);
         }
     }

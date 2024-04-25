@@ -29,7 +29,7 @@ public abstract class AbstractPower : MonoBehaviour
         }
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         if (cooldown > 0)
         {

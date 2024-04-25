@@ -9,6 +9,8 @@ public abstract class AbstractProjectile : MonoBehaviour
     public float lifeTime = 3f;
     public float damage = 10f;
 
+    public bool destroyOnHit = true;
+
     //[HideInInspector]
     public GameObject launcher;
 
@@ -35,9 +37,14 @@ public abstract class AbstractProjectile : MonoBehaviour
                 {
                     enemy.TakeDamage(damage);
                 }
+                if (destroyOnHit)
+                {
+                    Destroy(gameObject);
+                }
             }
 
-        } 
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -51,8 +58,13 @@ public abstract class AbstractProjectile : MonoBehaviour
                 {
                     player.TakeDamage(damage);
                 }
+                if (destroyOnHit)
+                {
+                    Destroy(gameObject);
+                }
             }
 
         }
+       
     }
 }
