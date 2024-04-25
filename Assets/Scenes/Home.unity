@@ -7196,6 +7196,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
+      propertyPath: musicSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
+      propertyPath: musicSounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3d23e31161820b708a748e51cca7fe8d, type: 3}
+    - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
+      propertyPath: musicSounds.Array.data[0].name
+      value: Theme
+      objectReference: {fileID: 0}
     - target: {fileID: 5595898514277950150, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.678095
