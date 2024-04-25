@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
     private Transform playerTransform;
 
     public float speed = 1f;
+    public float maxMagnitude = 20f;
 
     private List<AbstractPower> powers = new List<AbstractPower>();
 
@@ -35,6 +36,13 @@ public class EnemyController : MonoBehaviour
 
         // Rotate player to face mouse position
         transform.up = direction;
+
+        if (direction.magnitude > maxMagnitude)
+        {   
+            // Kill enemy if too far away from player
+            Destroy(gameObject);
+            return;
+        }
 
         // Move enemy to player
         if (direction.magnitude > .1f)

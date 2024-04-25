@@ -612,7 +612,7 @@ PrefabInstance:
       objectReference: {fileID: 1579106487}
     - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
       propertyPath: waveBaseDuration
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
       propertyPath: powerChoiceScreen
@@ -841,10 +841,6 @@ PrefabInstance:
     - target: {fileID: 2666050033503455025, guid: c3ea13743fd93a33aacd64fa2301524d, type: 3}
       propertyPath: m_Name
       value: EnemySpawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 4952570459013290750, guid: c3ea13743fd93a33aacd64fa2301524d, type: 3}
-      propertyPath: enemyPowers.Array.size
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4952570459013290750, guid: c3ea13743fd93a33aacd64fa2301524d, type: 3}
       propertyPath: enemyPowers.Array.data[0]
