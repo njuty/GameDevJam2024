@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Wave settings")]
     [SerializeField]
-    private float waveBaseDuration = 20f;
+    private float waveBaseDuration = 40f;
     [SerializeField]
     private float waveDurationStep = 5f;
     [SerializeField]
@@ -53,6 +54,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        // Register event for game over
+        playerController.onDeath += OnDeath;
         // Register event for power selection
         powerChoiceScreen.onSelectPower += OnSelectPower;
 
@@ -223,6 +226,19 @@ public class GameManager : MonoBehaviour
         Time.timeScale = isPaused ? 0 : 1;
     }
 
+    void OnDeath()
+    {
+        SetGamePaused(true);
+        uiManager.ToggleScreen("UI_GameOverScreen", true);
+    }
+
+    void ResetScene()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+        SetGamePaused(false);
+    }
+    
     public void StartEndlessWave()
     {
         uiManager.ToggleScreen("UI_GameScreen", true);

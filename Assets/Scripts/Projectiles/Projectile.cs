@@ -17,4 +17,5 @@ public class Projectile : AbstractProjectile
     {
         rb.velocity = transform.up * speed;
     }
+
 }

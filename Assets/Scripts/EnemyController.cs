@@ -9,6 +9,19 @@ public class EnemyController : MonoBehaviour
     public float maxDistance = 20f;
     public float minDistanceForPower = 10f;
 
+    [HideInInspector]
+    float physicalDamage = 1f;
+
+
+    [SerializeField]
+    HealthBar healthBar;
+
+    private bool isDead = false;
+
+    Rigidbody2D rb;
+
+    Animator animator;
+
     private List<AbstractPower> powers = new List<AbstractPower>();
 
     public void AddPower(AbstractPower power)
@@ -20,17 +33,20 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
 
         if (!playerTransform)
         {
             Debug.LogError("Unable to find player");
         }
+
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (!playerTransform) return;
+        if (!playerTransform || isDead) return;
 
         var distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
@@ -60,6 +76,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+
     void ActivatePower()
     {
         // Search for the first available power
@@ -72,4 +89,31 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
+    public void TakeDamage(float amount)
+    {
+        animator.SetTrigger("isTouched");
+        healthBar.UpdateHealth(-amount);
+        if (healthBar.health <= 0)
+        {
+            animator.SetBool("isDead", true);
+            isDead = true;
+            Destroy(rb);
+        }
+    }
+
+    void onDeathAnimationComplete()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            player.TakeDamage(physicalDamage);
+        }
+    }
+
 }
