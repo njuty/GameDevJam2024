@@ -5,7 +5,7 @@ using DG.Tweening;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField]
-    private float maxHealth = 100f;
+    public float maxHealth = 100f;
 
     public float health;
 

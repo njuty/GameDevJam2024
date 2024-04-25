@@ -135,9 +135,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifeTime: 0.4
-  damage: 10
+  damage: 20
+  destroyOnHit: 0
   launcher: {fileID: 0}
   enemySpeed: 5
   enemyLifeTime: 0.5
-  enemyDamage: 5
-  scaleTo: 40
+  enemyDamage: 10
+  scaleTo: 30

@@ -501,6 +501,7 @@ MonoBehaviour:
   speed: 1
   maxDistance: 20
   minDistanceForPower: 5
+  physicalDamage: 1
   healthBar: {fileID: 5893357089536056581}
 --- !u!70 &3454902783105341404
 CapsuleCollider2D:

@@ -11,7 +11,7 @@ public abstract class AbstractProjectile : MonoBehaviour
 
     public bool destroyOnHit = true;
 
-    //[HideInInspector]
+    [HideInInspector]
     public GameObject launcher;
 
     [Header("Enemy variant")]
@@ -26,7 +26,7 @@ public abstract class AbstractProjectile : MonoBehaviour
         damage = enemyDamage;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -44,10 +44,27 @@ public abstract class AbstractProjectile : MonoBehaviour
             }
 
         }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            bool isUseShield = collision.gameObject.transform.Find("Shield(Clone)");
+            if (launcher.CompareTag("Enemy") && !isUseShield)
+            {
+                PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+                if (player)
+                {
+                    player.TakeDamage(damage);
+                }
+                if (destroyOnHit)
+                {
+                    Destroy(gameObject);
+                }
+            }
+
+        }
 
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.CompareTag("Player"))
         {
@@ -65,6 +82,20 @@ public abstract class AbstractProjectile : MonoBehaviour
             }
 
         }
-       
+        else if (collider.gameObject.CompareTag("Enemy"))
+        {
+            if (launcher.CompareTag("Player"))
+            {
+                EnemyController enemy = collider.gameObject.GetComponent<EnemyController>();
+                if (enemy)
+                {
+                    enemy.TakeDamage(damage);
+                }
+                if (destroyOnHit)
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
     }
 }
