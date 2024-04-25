@@ -595,6 +595,34 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 3181614550435733444, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181614550435733444, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181614550435733444, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181614550435733444, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181614550435733444, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181614550435733444, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181614550435733444, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181614550435733444, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -615,10 +643,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 44345570}
     - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 7627658427364626862}
@@ -631,21 +655,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1579106487}
     - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
-      propertyPath: waveBaseDuration
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
       propertyPath: powerChoiceScreen
       value: 
       objectReference: {fileID: 1339173253}
-    - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
-      propertyPath: waveCursorTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 6f2481ea82cb41bb2a1ae9a50b5b535d, type: 3}
-    - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
-      propertyPath: availablePowersList.Array.data[6]
-      value: 
-      objectReference: {fileID: -9078252420988632015, guid: a229ad152643b3f588ec4b0a96af1c39, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

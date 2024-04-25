@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale == 0) return;
+        if (Time.timeScale == 0 || healthBar.health <= 0f) return;
 
         // Rotate player to face mouse position
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         for (var i = 0; i < powers.Count; i++)
         {
             if (i >= alphaKeyCodes.Length) break;
-            
+
             if (Input.GetKeyDown(alphaKeyCodes[i]))
             {
                 SetActivePower(i);
@@ -154,12 +154,17 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("isTouched");
         if (healthBar.health <= 0f)
         {
-            onDeath();
+            animator.SetBool("isDead", true);
         }
     }
 
     public List<AbstractPower> GetPowers()
     {
         return powers;
+    }
+
+    void OnDeathAnimationCompleted()
+    {
+        onDeath();
     }
 }
