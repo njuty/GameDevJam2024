@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Wave settings")]
     [SerializeField]
-    private float waveBaseDuration = 20f;
+    private float waveBaseDuration = 40f;
     [SerializeField]
     private float waveDurationStep = 5f;
     [SerializeField]

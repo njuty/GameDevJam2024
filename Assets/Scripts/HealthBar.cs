@@ -4,7 +4,8 @@ using DG.Tweening;
 
 public class HealthBar : MonoBehaviour
 {
-    private const float MAX_HEALTH = 100f;
+    [SerializeField]
+    private float maxHealth = 100f;
 
     public float health;
 
@@ -17,20 +18,20 @@ public class HealthBar : MonoBehaviour
 
     void Start()
     {
-        health = MAX_HEALTH;
+        health = maxHealth;
         UpdateHealthBar();
     }
 
     public void UpdateHealth(float amount)
     {
         float newAmount = health + amount;
-        health = Mathf.Clamp(newAmount, 0, MAX_HEALTH);
+        health = Mathf.Clamp(newAmount, 0, maxHealth);
         UpdateHealthBar();
     }
 
     void UpdateHealthBar()
     {
-        float fillAmount = health / MAX_HEALTH;
+        float fillAmount = health / maxHealth;
         healthBarImageToFill.DOFillAmount(fillAmount, 0.5f);
         healthBarImageToFill.DOColor(gradient.Evaluate(fillAmount), 0.5f);
     }
