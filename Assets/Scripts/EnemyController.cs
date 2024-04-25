@@ -6,7 +6,8 @@ public class EnemyController : MonoBehaviour
     private Transform playerTransform;
 
     public float speed = 1f;
-    public float maxMagnitude = 20f;
+    public float maxDistance = 20f;
+    public float minDistanceForPower = 10f;
 
     private List<AbstractPower> powers = new List<AbstractPower>();
 
@@ -31,18 +32,20 @@ public class EnemyController : MonoBehaviour
     {
         if (!playerTransform) return;
 
-        // Get direction to player
-        Vector3 direction = new Vector2(playerTransform.position.x - transform.position.x, playerTransform.position.y - transform.position.y);
+        var distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
-        // Rotate player to face mouse position
-        transform.up = direction;
-
-        if (direction.magnitude > maxMagnitude)
+        if (distanceToPlayer > maxDistance)
         {   
             // Kill enemy if too far away from player
             Destroy(gameObject);
             return;
         }
+
+        // Get direction to player
+        Vector3 direction = new Vector2(playerTransform.position.x - transform.position.x, playerTransform.position.y - transform.position.y);
+        
+        // Rotate player to face mouse position
+        transform.up = direction;
 
         // Move enemy to player
         if (direction.magnitude > .1f)
@@ -51,7 +54,10 @@ public class EnemyController : MonoBehaviour
             transform.position += direction * speed * Time.deltaTime;
         }
 
-        ActivatePower();
+        if (distanceToPlayer < minDistanceForPower)
+        {
+            ActivatePower();
+        }
     }
 
     void ActivatePower()

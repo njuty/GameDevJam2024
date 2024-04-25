@@ -38,9 +38,10 @@ public class Indicator : MonoBehaviour
                 indicatorObject.SetActive(true);
             }
 
+            var distance = Vector2.Distance(transform.position, targetTransform.position);
             Vector3 direction = new Vector2(targetTransform.position.x - transform.position.x, targetTransform.position.y - transform.position.y);
 
-            var hit = Physics2D.Raycast(transform.position, direction, direction.magnitude, LayerMask.GetMask("CameraBox"));
+            var hit = Physics2D.Raycast(transform.position, direction, distance, LayerMask.GetMask("CameraBox"));
             if (hit.collider != null)
             {
                 indicatorObject.transform.position = hit.point;
