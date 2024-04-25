@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    public delegate void OnDeath();
+    public event OnDeath onDeath;
+
     private readonly KeyCode[] alphaKeyCodes = {
         KeyCode.Alpha1,
         KeyCode.Alpha2,
@@ -24,7 +27,11 @@ public class PlayerController : MonoBehaviour
     private AbstractPower activePower;
     private int activePowerIndex;
 
+    Animator animator;
+
     [Header("Player settings")]
+    [SerializeField]
+    private HealthBar healthBar;
     [SerializeField] private float speed = 2.5f;
     [SerializeField] private float maxSpeed = 5f;
 
@@ -46,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
         GetComponentsInChildren(powers);
@@ -138,5 +146,15 @@ public class PlayerController : MonoBehaviour
 
         // Update UI
         powersInventory.SetActivePower(activePower);
+    }
+
+    public void TakeDamage(float amount)
+    {
+        healthBar.UpdateHealth(-amount);
+        animator.SetTrigger("isTouched");
+        if (healthBar.health <= 0f)
+        {
+            onDeath();
+        }
     }
 }

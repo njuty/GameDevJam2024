@@ -23,6 +23,7 @@ public class SingleProjectilePower : AbstractPower
         var spriteBounds = projectilePrefab.GetComponent<SpriteRenderer>().bounds;
         var projectile = Instantiate(projectilePrefab, shootPoint.position + (shootPoint.up * spriteBounds.size.y / 2), shootPoint.rotation)
             .GetComponent<AbstractProjectile>();
+        projectile.launcher = parentController;
 
         if (isEnemyPower)
         {
