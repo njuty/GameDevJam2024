@@ -46,8 +46,15 @@ public abstract class AbstractPower : MonoBehaviour
             return playerController.gameObject;
         }
 
-        isEnemyPower = true;
-        return GetComponentInParent<EnemyController>().gameObject;
+        var enemyController = GetComponentInParent<EnemyController>();
+
+        if (enemyController)
+        {
+            isEnemyPower = true;
+            return enemyController.gameObject;
+        }
+        
+        return gameObject.transform.parent.gameObject;
     }
     
     public abstract void Activate();
