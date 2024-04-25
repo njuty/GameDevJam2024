@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3181614550435733444}
   - component: {fileID: 3904512927205946203}
+  - component: {fileID: 2326988428128983795}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,3 +45,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08264dd5e32ef5c558c526d694539dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  waveBaseDuration: 20
+  waveDurationStep: 5
+  maxWave: 10
+  spawner: {fileID: 0}
+  spawnFrequencyStep: 0.25
+  availablePowersList:
+  - {fileID: -3389998128039314399, guid: de4fe5fc8b2a7cd81a32858e88c7c00f, type: 3}
+  - {fileID: -3389998128039314399, guid: 7391ee26cce3452bd9a407990418cd85, type: 3}
+  - {fileID: -3389998128039314399, guid: ef58adff5faa1ff9ab622be38336581c, type: 3}
+  - {fileID: 7493769271096855561, guid: 61e876fd31c5065ff9c9c181f1a70913, type: 3}
+  - {fileID: 3805635906188793392, guid: 31bbe28121b522e5fa0b3c3bee9992cf, type: 3}
+  - {fileID: 7359655826622744524, guid: 4b93558b3f3094e6e99355b985e6b069, type: 3}
+  uiManager: {fileID: 0}
+  waveText: {fileID: 0}
+  waveTimer: {fileID: 0}
+  powerChoiceScreen: {fileID: 0}
+--- !u!114 &2326988428128983795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171097024857876822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d69e9b116c44091ac652d0383f64d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPotion: {fileID: 4266307375050572477, guid: 0e1c725811ec54180b609dcf6f244cf2, type: 3}
+  invisibilityPotion: {fileID: 2780671998783529543, guid: 2b4cc6fb86dce4bb9b0ea5308a777297, type: 3}
+  spawnRadius: 20
+  minTimeBetweenSpawns: 5
+  maxTimeBetweenSpawns: 20
+  chanceHealthPotion: 0.6
+  chanceInvisibilityPotion: 0.3

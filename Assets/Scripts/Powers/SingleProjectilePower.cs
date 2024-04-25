@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class SingleProjectilePower : AbstractPower
 {
+    [Header("Power props")]
     [SerializeField] private GameObject projectilePrefab;
 
     private Transform shootPoint;
 
-    void Start()
+    protected override void Start()
     {
-        // Powers should always be placed in a "Powers" empty object
-        // ex. Player/Powers/AwesomePower
-        // ex. Enemy/Powers/AwesomePower
-        var parent = GetControllerGameObject();
-        shootPoint = parent.transform.Find("ShootPoint").GetComponent<Transform>();
+        base.Start();
+        shootPoint = parentController.transform.Find("ShootPoint").GetComponent<Transform>();
     }
 
     public override void Activate()
@@ -23,7 +21,14 @@ public class SingleProjectilePower : AbstractPower
 
         // Get sprite size to correctly place the projectile in front of the player
         var spriteBounds = projectilePrefab.GetComponent<SpriteRenderer>().bounds;
-        Instantiate(projectilePrefab, shootPoint.position + (shootPoint.up * spriteBounds.size.y / 2), shootPoint.rotation);
+        var projectile = Instantiate(projectilePrefab, shootPoint.position + (shootPoint.up * spriteBounds.size.y / 2), shootPoint.rotation)
+            .GetComponent<AbstractProjectile>();
+
+        if (isEnemyPower)
+        {
+            // Apply enemy variant for projectiles
+            projectile.SetEnemyVariant();
+        }
 
         // Set cooldown before next power use
         cooldown = activationRate;
@@ -32,17 +37,5 @@ public class SingleProjectilePower : AbstractPower
     public override bool CanActivate()
     {
         return cooldown <= 0;
-    }
-
-    GameObject GetControllerGameObject()
-    {
-        var playerController = GetComponentInParent<PlayerController>();
-
-        if (playerController)
-        {
-            return playerController.gameObject;
-        }
-
-        return GetComponentInParent<EnemyController>().gameObject;
     }
 }
