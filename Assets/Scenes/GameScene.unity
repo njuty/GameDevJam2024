@@ -587,6 +587,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1579106487}
     - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
+      propertyPath: waveBaseDuration
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
       propertyPath: powerChoiceScreen
       value: 
       objectReference: {fileID: 1339173253}
