@@ -194,6 +194,8 @@ public class GameManager : MonoBehaviour
 
     void OnSelectPower(AbstractPower selectedPower, AbstractPower omittedPower)
     {
+        AudioManager.instance.PlaySFX("selectPower");
+
         // Add selected power to player
         playerController.AddPower(selectedPower);
 

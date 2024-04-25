@@ -23,18 +23,17 @@ public class PlayerController : MonoBehaviour
     [Header("UI")]
     [SerializeField] private UIPowersInventory powersInventory;
 
-    private List<AbstractPower> powers = new List<AbstractPower>();
-    private AbstractPower activePower;
-    private int activePowerIndex;
-
-    Animator animator;
-
     [Header("Player settings")]
     [SerializeField]
     private HealthBar healthBar;
     [SerializeField] private float speed = 2.5f;
     [SerializeField] private float maxSpeed = 5f;
 
+    private List<AbstractPower> powers = new List<AbstractPower>();
+    private AbstractPower activePower;
+    private int activePowerIndex;
+
+    private Animator animator;
     private Rigidbody2D rb;
 
     public void AddPower(AbstractPower power)
@@ -70,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale == 0 || healthBar.health <= 0f) return;
+        if (Time.timeScale == 0 || IsDead()) return;
 
         // Rotate player to face mouse position
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -150,12 +149,20 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        if (IsDead()) return;
+
         healthBar.UpdateHealth(-amount);
         animator.SetTrigger("isTouched");
-        if (healthBar.health <= 0f)
+        if (IsDead())
         {
             animator.SetBool("isDead", true);
+            AudioManager.instance.PlaySFX("playerDeath");
         }
+    }
+
+    public bool IsDead()
+    {
+        return healthBar.health <= 0f;
     }
 
     public List<AbstractPower> GetPowers()

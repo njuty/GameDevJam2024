@@ -27,6 +27,9 @@ public class UIPowersInventory : MonoBehaviour
         var uiPowerItem = powerItem.GetComponent<UIPowerItem>();
         uiPowerItem.Init(power);
 
+        // Be sure that power cooldown is reset
+        power.cooldown = 0;
+
         powerItems.Add(power, uiPowerItem);
     }
 

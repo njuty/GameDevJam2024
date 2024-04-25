@@ -15,7 +15,7 @@ public abstract class AbstractPower : MonoBehaviour
     protected GameObject parentController;
     protected bool isEnemyPower = false;
 
-    public float cooldown { get; protected set; } = 0f;
+    public float cooldown = 0f;
 
     protected virtual void Start()
     {

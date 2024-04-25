@@ -7197,8 +7197,28 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
+      propertyPath: sfxSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
       propertyPath: musicSounds.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
+      propertyPath: sfxSounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8978b6868c4e60f8a85bab7ba29bc686, type: 3}
+    - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
+      propertyPath: sfxSounds.Array.data[0].name
+      value: playerDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
+      propertyPath: sfxSounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3f1b9fed5e4be9c338029f11efeccf15, type: 3}
+    - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
+      propertyPath: sfxSounds.Array.data[1].name
+      value: selectPower
       objectReference: {fileID: 0}
     - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
       propertyPath: musicSounds.Array.data[0].clip
