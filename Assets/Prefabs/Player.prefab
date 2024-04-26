@@ -639,7 +639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powersInventory: {fileID: 0}
-  health: {fileID: 0}
+  healthBar: {fileID: 0}
   speed: 10
   maxSpeed: 3
 --- !u!70 &4932767364035902782
@@ -674,8 +674,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0006759167, y: 0}
-  m_Size: {x: 0.1883905, y: 0.1883905}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.34857428, y: 0.34857428}
   m_Direction: 0
 --- !u!95 &7838002918076100041
 Animator:

@@ -163,9 +163,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   lifeTime: 1
-  damage: 10
+  damage: 5
   destroyOnHit: 1
   launcher: {fileID: 0}
   enemySpeed: 2
   enemyLifeTime: 3
-  enemyDamage: 5
+  enemyDamage: 2
