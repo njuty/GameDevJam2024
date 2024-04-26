@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 EndCurrentWave();
+                ShowPowerChoice();
             }
         }
     }
@@ -122,13 +123,11 @@ public class GameManager : MonoBehaviour
         spawner.ClearSpawns();
 
         // Clear all objects limited to game screen (ex. projectiles)
-        var gameScreenObjects = GameObject.FindGameObjectsWithTag("GameScreenObject");
+        var gameScreenObjects = GameObject.FindGameObjectsWithTag("GameScreenLimitedObject");
         foreach (var gameScreenObject in gameScreenObjects)
         {
             Destroy(gameScreenObject);
         }
-
-        ShowPowerChoice();
     }
 
     void UpdateWaveHud()
@@ -180,10 +179,12 @@ public class GameManager : MonoBehaviour
         {
             do
             {
-                firstPowerIndex = Random.Range(0, availablePowersList.Count - 1);
-                secondPowerIndex = Random.Range(0, availablePowersList.Count - 1);
+                firstPowerIndex = Random.Range(0, availablePowersList.Count);
+                secondPowerIndex = Random.Range(0, availablePowersList.Count);
             } while (firstPowerIndex == secondPowerIndex);
         }
+
+        AudioManager.instance.PlaySFX("showSelectPower");
 
         // Display PowerChoice screen
         uiManager.ToggleScreen("UI_PowerChoiceScreen", true);
@@ -195,6 +196,8 @@ public class GameManager : MonoBehaviour
 
     void OnSelectPower(AbstractPower selectedPower, AbstractPower omittedPower)
     {
+        AudioManager.instance.PlaySFX("selectPower");
+
         // Add selected power to player
         playerController.AddPower(selectedPower);
 
@@ -229,14 +232,35 @@ public class GameManager : MonoBehaviour
     void OnDeath()
     {
         SetGamePaused(true);
-        uiManager.ToggleScreen("UI_GameOverScreen", true);
+        EndCurrentWave();
+
+        // Hide player
+        playerController.gameObject.SetActive(false);
+
+        ShowGameOverScreen();
     }
 
-    void ResetScene()
+    public void ShowGameOverScreen()
+    {
+        uiManager.ShowGameOverScreen(
+            currentWave,
+            currentWaveRemainingTime,
+            isEndlessWave,
+            playerController.GetPowers(),
+            spawner.GetPowers()
+        );
+    }
+
+    public void ResetScene()
     {
         Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+        GoToScene(scene.name);
+    }
+
+    public void GoToScene(string sceneName)
+    {
         SetGamePaused(false);
+        SceneManager.LoadScene(sceneName);
     }
     
     public void StartEndlessWave()

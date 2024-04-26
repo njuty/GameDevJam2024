@@ -15,7 +15,7 @@ public abstract class AbstractPower : MonoBehaviour
     protected GameObject parentController;
     protected bool isEnemyPower = false;
 
-    public float cooldown { get; protected set; } = 0f;
+    public float cooldown = 0f;
 
     protected virtual void Start()
     {
@@ -46,8 +46,15 @@ public abstract class AbstractPower : MonoBehaviour
             return playerController.gameObject;
         }
 
-        isEnemyPower = true;
-        return GetComponentInParent<EnemyController>().gameObject;
+        var enemyController = GetComponentInParent<EnemyController>();
+
+        if (enemyController)
+        {
+            isEnemyPower = true;
+            return enemyController.gameObject;
+        }
+        
+        return gameObject.transform.parent.gameObject;
     }
     
     public abstract void Activate();

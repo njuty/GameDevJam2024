@@ -32,6 +32,7 @@ public abstract class Potion : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            AudioManager.instance.PlaySFX("pickPotion");
             ApplyEffect();
             SetCatchAnimation();
         }

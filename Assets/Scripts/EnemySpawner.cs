@@ -80,11 +80,16 @@ public class EnemySpawner : MonoBehaviour
             if (enemyPowers.Count > 0)
             {
                 // Pick a random power and give it to enemy
-                var powerIndex = Random.Range(0, enemyPowers.Count - 1);
+                var powerIndex = Random.Range(0, enemyPowers.Count);
                 enemyController.AddPower(enemyPowers[powerIndex]);
             }
 
             yield return new WaitForSeconds(spawnInterval);
         }
+    }
+
+    public List<AbstractPower> GetPowers()
+    {
+        return enemyPowers;
     }
 }
