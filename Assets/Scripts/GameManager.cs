@@ -122,11 +122,18 @@ public class GameManager : MonoBehaviour
         spawner.StopSpawner();
         spawner.ClearSpawns();
 
-        // Clear all objects limited to game screen (ex. projectiles)
+        // Clear all objects limited to game screen
         var gameScreenObjects = GameObject.FindGameObjectsWithTag("GameScreenLimitedObject");
         foreach (var gameScreenObject in gameScreenObjects)
         {
             Destroy(gameScreenObject);
+        }
+
+        // Clear all power effects (projectiles)
+        var powerEffectObjects = GameObject.FindGameObjectsWithTag("PowerEffect");
+        foreach (var powerEffectObject in powerEffectObjects)
+        {
+            Destroy(powerEffectObject);
         }
     }
 
@@ -184,7 +191,14 @@ public class GameManager : MonoBehaviour
             } while (firstPowerIndex == secondPowerIndex);
         }
 
-        AudioManager.instance.PlaySFX("showSelectPower");
+        try
+        {
+            AudioManager.instance.PlaySFX("showSelectPower");
+        }
+        catch
+        {
+            Debug.LogWarning("Unable to play audio");
+        }
 
         // Display PowerChoice screen
         uiManager.ToggleScreen("UI_PowerChoiceScreen", true);
@@ -196,7 +210,15 @@ public class GameManager : MonoBehaviour
 
     void OnSelectPower(AbstractPower selectedPower, AbstractPower omittedPower)
     {
-        AudioManager.instance.PlaySFX("selectPower");
+        try
+        {
+            AudioManager.instance.PlaySFX("selectPower");
+        }
+        catch
+        {
+            Debug.LogWarning("Unable to play audio");
+        }
+
 
         // Add selected power to player
         playerController.AddPower(selectedPower);
@@ -262,7 +284,7 @@ public class GameManager : MonoBehaviour
         SetGamePaused(false);
         SceneManager.LoadScene(sceneName);
     }
-    
+
     public void StartEndlessWave()
     {
         uiManager.ToggleScreen("UI_GameScreen", true);

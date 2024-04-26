@@ -142,6 +142,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2126361641904954408, guid: e38d41cbb59a23b7d8542e9297cdebeb, type: 3}
+      propertyPath: m_UpscaleRT
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4457020760479404492, guid: e38d41cbb59a23b7d8542e9297cdebeb, type: 3}
       propertyPath: m_BackGroundColor.b
       value: 0.34509805
@@ -435,6 +439,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyShot
       objectReference: {fileID: 0}
+    - target: {fileID: 7226400702817739553, guid: a229ad152643b3f588ec4b0a96af1c39, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -639,6 +647,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
+      propertyPath: maxWave
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
       propertyPath: spawner
       value: 
       objectReference: {fileID: 1100647139}
@@ -660,12 +672,16 @@ PrefabInstance:
       objectReference: {fileID: 1579106487}
     - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
       propertyPath: waveBaseDuration
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
       propertyPath: powerChoiceScreen
       value: 
       objectReference: {fileID: 1339173253}
+    - target: {fileID: 3904512927205946203, guid: 344fa56f88505a70e9a00c74e2423f7d, type: 3}
+      propertyPath: spawnFrequencyStep
+      value: 0.15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -867,9 +883,13 @@ PrefabInstance:
       value: EnemySpawner
       objectReference: {fileID: 0}
     - target: {fileID: 4952570459013290750, guid: c3ea13743fd93a33aacd64fa2301524d, type: 3}
+      propertyPath: enemyPowers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952570459013290750, guid: c3ea13743fd93a33aacd64fa2301524d, type: 3}
       propertyPath: enemyPowers.Array.data[0]
       value: 
-      objectReference: {fileID: -3389998128039314399, guid: de4fe5fc8b2a7cd81a32858e88c7c00f, type: 3}
+      objectReference: {fileID: 7359655826622744524, guid: 4b93558b3f3094e6e99355b985e6b069, type: 3}
     - target: {fileID: 5138862079489274365, guid: c3ea13743fd93a33aacd64fa2301524d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

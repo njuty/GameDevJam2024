@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShockWavePower : AbstractPower
@@ -11,7 +9,8 @@ public class ShockWavePower : AbstractPower
     {
         if (!CanActivate()) return;
 
-        Instantiate(wavePrefab, parentController.transform);
+        var projectile = Instantiate(wavePrefab, parentController.transform).GetComponent<AbstractProjectile>();
+        projectile.launcher = parentController;
 
         // Set cooldown before next power use
         cooldown = activationRate;

@@ -9,8 +9,7 @@ public class EnemyController : MonoBehaviour
     public float maxDistance = 20f;
     public float minDistanceForPower = 10f;
 
-    [HideInInspector]
-    float physicalDamage = 1f;
+    public float physicalDamage = 1f;
 
 
     [SerializeField]

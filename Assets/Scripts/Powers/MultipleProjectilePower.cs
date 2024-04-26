@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,6 +36,7 @@ public class MultipleProjectilePower : AbstractPower
                 shootPoint.rotation * Quaternion.Euler(0f, 0f, projectileItem.angle)
             )
                 .GetComponent<AbstractProjectile>();
+            projectile.launcher = parentController;
 
             if (isEnemyPower)
             {

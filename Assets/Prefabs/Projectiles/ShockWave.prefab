@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9159135643611355243}
   m_Layer: 9
   m_Name: ShockWave
-  m_TagString: GameScreenLimitedObject
+  m_TagString: PowerEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,10 +135,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifeTime: 0.4
-  damage: 10
-  destroyOnHit: 1
+  damage: 20
+  destroyOnHit: 0
   launcher: {fileID: 0}
   enemySpeed: 5
   enemyLifeTime: 0.5
-  enemyDamage: 5
-  scaleTo: 40
+  enemyDamage: 10
+  scaleTo: 30
