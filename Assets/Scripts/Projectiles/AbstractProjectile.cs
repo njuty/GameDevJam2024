@@ -33,10 +33,10 @@ public abstract class AbstractProjectile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            bool isUseShield = collision.gameObject.transform.Find("Shield(Clone)");
             if (launcher.CompareTag("Player"))
             {
                 EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
+                bool isUseShield = collision.gameObject.transform.Find("Shield(Clone)");
                 if (enemy && !isUseShield)
                 {
                     enemy.TakeDamage(damage);
@@ -50,10 +50,10 @@ public abstract class AbstractProjectile : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
-            bool isUseShield = collision.gameObject.transform.Find("Shield(Clone)");
             if (launcher.CompareTag("Enemy"))
             {
                 PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+                bool isUseShield = collision.gameObject.transform.Find("Shield(Clone)");
                 if (player && !isUseShield)
                 {
                     player.TakeDamage(damage);
@@ -74,7 +74,8 @@ public abstract class AbstractProjectile : MonoBehaviour
             if (launcher.CompareTag("Enemy"))
             {
                 PlayerController player = collider.gameObject.GetComponent<PlayerController>();
-                if (player)
+                bool isUseShield = collider.gameObject.transform.Find("Shield(Clone)");
+                if (player && !isUseShield)
                 {
                     player.TakeDamage(damage);
                 }
@@ -83,14 +84,14 @@ public abstract class AbstractProjectile : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-
         }
         else if (collider.gameObject.CompareTag("Enemy"))
         {
             if (launcher.CompareTag("Player"))
             {
                 EnemyController enemy = collider.gameObject.GetComponent<EnemyController>();
-                if (enemy)
+                bool isUseShield = collider.gameObject.transform.Find("Shield(Clone)");
+                if (enemy && !isUseShield)
                 {
                     enemy.TakeDamage(damage);
                 }

@@ -17,6 +17,7 @@ public class ShieldPower : AbstractPower
 
         var shieldObject = Instantiate(shieldPrefab, parentController.transform);
         var shield = shieldObject.GetComponent<Shield>();
+        shield.launcher = parentController;
 
         if (isEnemyPower)
         {
