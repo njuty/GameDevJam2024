@@ -156,7 +156,15 @@ public class PlayerController : MonoBehaviour
         if (IsDead())
         {
             animator.SetBool("isDead", true);
-            AudioManager.instance.PlaySFX("playerDeath");
+            try
+            {
+                AudioManager.instance.PlaySFX("playerDeath");
+            }
+            catch
+            {
+                Debug.LogWarning("Unable to play audio");
+            }
+
         }
     }
 

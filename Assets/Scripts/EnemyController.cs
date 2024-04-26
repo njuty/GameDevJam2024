@@ -12,10 +12,11 @@ public class EnemyController : MonoBehaviour
     public float physicalDamage = 1f;
 
 
-    [SerializeField]
-    HealthBar healthBar;
+    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private float colliderHitRate = 0.75f;
 
     private bool isDead = false;
+    private float colliderHitCooldown = 0f;
 
     Rigidbody2D rb;
 
@@ -50,7 +51,7 @@ public class EnemyController : MonoBehaviour
         var distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
         if (distanceToPlayer > maxDistance)
-        {   
+        {
             // Kill enemy if too far away from player
             Destroy(gameObject);
             return;
@@ -58,7 +59,7 @@ public class EnemyController : MonoBehaviour
 
         // Get direction to player
         Vector3 direction = new Vector2(playerTransform.position.x - transform.position.x, playerTransform.position.y - transform.position.y);
-        
+
         // Rotate player to face mouse position
         transform.up = direction;
 
@@ -72,6 +73,12 @@ public class EnemyController : MonoBehaviour
         if (distanceToPlayer < minDistanceForPower)
         {
             ActivatePower();
+        }
+
+        if (colliderHitCooldown > 0)
+        {
+            // Update collider hit cooldown
+            colliderHitCooldown -= Time.deltaTime;
         }
     }
 
@@ -106,13 +113,26 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
+    void HitPlayerWithCollider(Collider2D collider)
+    {
+        PlayerController player = collider.gameObject.GetComponent<PlayerController>();
+        player.TakeDamage(physicalDamage);
+        colliderHitCooldown = colliderHitRate;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            player.TakeDamage(physicalDamage);
+            HitPlayerWithCollider(collision);
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && colliderHitCooldown <= 0)
+        {
+            HitPlayerWithCollider(collision);
+        }
+    }
 }

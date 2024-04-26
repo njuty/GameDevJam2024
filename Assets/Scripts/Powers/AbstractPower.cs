@@ -8,14 +8,13 @@ public abstract class AbstractPower : MonoBehaviour
 
     [Header("Cooldown")]
     public float activationRate = 0.5f;
+    public float cooldown = 0f;
 
     [Header("Enemy variant")]
     [SerializeField] private float enemyActivationRate = 0.5f;
 
     protected GameObject parentController;
     protected bool isEnemyPower = false;
-
-    public float cooldown = 0f;
 
     protected virtual void Start()
     {
