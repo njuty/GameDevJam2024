@@ -5,16 +5,35 @@ public class Shield : AbstractProjectile
     private HealthBar shieldHealthBar;
     private GameObject shieldBar;
     private bool isDestroyed = false;
+    private float remainingTime = 0f;
 
     // Events
     public delegate void OnShieldDestroyed(Shield shield);
     public event OnShieldDestroyed onShieldDestroyed;
 
+    void Start()
+    {
+        remainingTime = lifeTime;
+    }
+
+    void Update()
+    {
+        if (remainingTime > 0)
+        {
+            remainingTime -= Time.deltaTime;
+        }
+        else
+        {
+            isDestroyed = true;
+            shieldHealthBar.ResetHealth();
+            onShieldDestroyed(this);
+        }
+    }
+
     public void Init()
     {
         GameObject shieldBarParent;
 
-        Debug.Log(isEnemyVariant);
         if (!isEnemyVariant)
         {
             shieldBarParent = GameObject.Find("ShieldBarParent");
@@ -53,16 +72,20 @@ public class Shield : AbstractProjectile
             else
             {
                 AbstractProjectile abstractProjectile = collision.gameObject.GetComponent<AbstractProjectile>();
-                if (abstractProjectile)
+                if (abstractProjectile.launcher != launcher)
                 {
-                    damage = abstractProjectile.damage;
+                    if (abstractProjectile)
+                    {
+                        damage = abstractProjectile.damage;
+                    }
+                    Destroy(abstractProjectile);
                 }
-                Destroy(abstractProjectile);
             }
 
             if (shieldHealthBar.health - damage <= 0f)
             {
                 isDestroyed = true;
+                shieldHealthBar.ResetHealth();
                 onShieldDestroyed(this);
             }
             else

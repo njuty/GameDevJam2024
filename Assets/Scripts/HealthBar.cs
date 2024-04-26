@@ -29,6 +29,11 @@ public class HealthBar : MonoBehaviour
         UpdateHealthBar();
     }
 
+    public void ResetHealth()
+    {
+        health = maxHealth;
+    }
+
     void UpdateHealthBar()
     {
         float fillAmount = health / maxHealth;
