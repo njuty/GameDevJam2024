@@ -2463,6 +2463,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0bdd03e2b9c9dbbca825b81dacde5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveResultText: {fileID: 0}
+  unlockedPowersList: {fileID: 0}
+  enemyPowersList: {fileID: 0}
 --- !u!114 &8601104761698075413
 MonoBehaviour:
   m_ObjectHideFlags: 0
