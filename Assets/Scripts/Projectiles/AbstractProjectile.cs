@@ -19,8 +19,11 @@ public abstract class AbstractProjectile : MonoBehaviour
     [SerializeField] protected float enemyLifeTime = 3f;
     [SerializeField] protected float enemyDamage = 5f;
 
+    protected bool isEnemyVariant = false;
+
     public virtual void SetEnemyVariant()
     {
+        isEnemyVariant = true;
         speed = enemySpeed;
         lifeTime = enemyLifeTime;
         damage = enemyDamage;
@@ -30,10 +33,11 @@ public abstract class AbstractProjectile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            bool isUseShield = collision.gameObject.transform.Find("Shield(Clone)");
             if (launcher.CompareTag("Player"))
             {
                 EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
-                if (enemy)
+                if (enemy && !isUseShield)
                 {
                     enemy.TakeDamage(damage);
                 }
@@ -47,10 +51,10 @@ public abstract class AbstractProjectile : MonoBehaviour
         else if (collision.gameObject.CompareTag("Player"))
         {
             bool isUseShield = collision.gameObject.transform.Find("Shield(Clone)");
-            if (launcher.CompareTag("Enemy") && !isUseShield)
+            if (launcher.CompareTag("Enemy"))
             {
                 PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-                if (player)
+                if (player && !isUseShield)
                 {
                     player.TakeDamage(damage);
                 }
@@ -59,7 +63,6 @@ public abstract class AbstractProjectile : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-
         }
 
     }

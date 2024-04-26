@@ -11,16 +11,25 @@ public class ShieldPower : AbstractPower
     {
         if (!CanActivate()) return;
 
-        Instantiate(shieldPrefab, parentController.transform);
-        
         // Set cooldown before next power use
         cooldown = activationRate;
         isActiveShield = true;
+
+        var shieldObject = Instantiate(shieldPrefab, parentController.transform);
+        var shield = shieldObject.GetComponent<Shield>();
+
+        if (isEnemyPower)
+        {
+            shield.SetEnemyVariant();
+        }
+        
+        shield.Init();
+        shield.onShieldDestroyed += OnShieldDestroyed;
     }
 
     public override bool CanActivate()
     {
-        return cooldown <= 0;
+        return cooldown <= 0 && !isActiveShield;
     }
 
     protected override void Update()
@@ -29,5 +38,11 @@ public class ShieldPower : AbstractPower
         {
             cooldown -= Time.deltaTime;
         }
+    }
+
+    void OnShieldDestroyed(Shield shield)
+    {
+        Destroy(shield.gameObject);
+        isActiveShield = false;
     }
 }

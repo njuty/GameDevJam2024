@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4730704927390160235}
   m_Layer: 7
   m_Name: Shield
-  m_TagString: GameScreenLimitedObject
+  m_TagString: PowerEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

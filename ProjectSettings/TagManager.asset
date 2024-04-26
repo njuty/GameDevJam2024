@@ -12,6 +12,7 @@ TagManager:
   - UI_EndlessWaveScreen
   - UI_GameOverScreen
   - GameScreenLimitedObject
+  - PowerEffect
   layers:
   - Default
   - TransparentFX

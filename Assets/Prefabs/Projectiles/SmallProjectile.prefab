@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3401769983638356524}
   m_Layer: 9
   m_Name: SmallProjectile
-  m_TagString: GameScreenLimitedObject
+  m_TagString: PowerEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

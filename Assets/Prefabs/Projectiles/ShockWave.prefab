@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9159135643611355243}
   m_Layer: 9
   m_Name: ShockWave
-  m_TagString: GameScreenLimitedObject
+  m_TagString: PowerEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
