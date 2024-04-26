@@ -7198,7 +7198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
       propertyPath: sfxSounds.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
       propertyPath: musicSounds.Array.size
@@ -7219,6 +7219,22 @@ PrefabInstance:
     - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
       propertyPath: sfxSounds.Array.data[1].name
       value: selectPower
+      objectReference: {fileID: 0}
+    - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
+      propertyPath: sfxSounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9b5ce85ca515eef339c46b53a43c5698, type: 3}
+    - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
+      propertyPath: sfxSounds.Array.data[2].name
+      value: showSelectPower
+      objectReference: {fileID: 0}
+    - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
+      propertyPath: sfxSounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 132448f8169db1fe3840fdfe0b72b9e5, type: 3}
+    - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
+      propertyPath: sfxSounds.Array.data[3].name
+      value: pickPotion
       objectReference: {fileID: 0}
     - target: {fileID: 3533052846143150154, guid: 5911534a57d764a3ba821325ec16ee9b, type: 3}
       propertyPath: musicSounds.Array.data[0].clip

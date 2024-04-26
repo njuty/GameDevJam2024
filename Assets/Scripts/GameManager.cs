@@ -184,6 +184,8 @@ public class GameManager : MonoBehaviour
             } while (firstPowerIndex == secondPowerIndex);
         }
 
+        AudioManager.instance.PlaySFX("showSelectPower");
+
         // Display PowerChoice screen
         uiManager.ToggleScreen("UI_PowerChoiceScreen", true);
         powerChoiceScreen.ShowPowerChoice(
