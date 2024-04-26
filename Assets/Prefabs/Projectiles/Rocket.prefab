@@ -300,7 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   lifeTime: 3
-  damage: 15
+  damage: 20
   destroyOnHit: 1
   launcher: {fileID: 0}
   enemySpeed: 4

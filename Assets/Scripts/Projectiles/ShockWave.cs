@@ -15,7 +15,7 @@ public class ShockWave : AbstractProjectile
 
         var sequence = DOTween.Sequence()
             .Append(transform.DOScale(scaleTo, lifeTime))
-            .Append(sprite.DOFade(0f, lifeTime));
+            .Join(sprite.DOFade(0f, lifeTime));
 
         sequence
             .OnComplete(OnAnimationComplete);

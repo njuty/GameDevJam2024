@@ -47,5 +47,6 @@ MonoBehaviour:
   powerName: Shock Wave
   powerIcon: {fileID: 10912, guid: 0000000000000000f000000000000000, type: 0}
   activationRate: 10
-  enemyActivationRate: 20
+  cooldown: 0
+  enemyActivationRate: 18
   wavePrefab: {fileID: 2224640604845539841, guid: bafcb618d8434a45484eb28189b24685, type: 3}

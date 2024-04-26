@@ -141,4 +141,4 @@ MonoBehaviour:
   enemySpeed: 5
   enemyLifeTime: 0.5
   enemyDamage: 10
-  scaleTo: 30
+  scaleTo: 25
