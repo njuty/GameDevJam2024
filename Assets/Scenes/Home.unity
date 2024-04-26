@@ -6270,7 +6270,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Power Shift Survivor
+  m_text: Space Powers Divided
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9341c5fdbc34a5bd38a41183ce5d5d24, type: 2}
   m_sharedMaterial: {fileID: 1856207418551280658, guid: 9341c5fdbc34a5bd38a41183ce5d5d24, type: 2}
